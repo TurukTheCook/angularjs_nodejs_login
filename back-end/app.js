@@ -8,10 +8,18 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use(function (req, res, next) {
+  res.header(`Access-Control-Allow-Origin`, `*`);
+  res.header(`Access-Control-Allow-Methods`, `GET,PUT,POST,DELETE`);
+  res.header(`Access-Control-Allow-Headers`, `Content-Type`);
+  next();
+});
+
 app.post('/login', function(req, res){
   var username = req.body.username;
   var password = req.body.password;
   var user = findUserValid(username, password);
+  console.log(username, password);
 
   if (typeof(username) == 'string' && typeof(password) == 'string' && user){
     var token = randomToken();
