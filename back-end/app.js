@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.post('/login', function(req, res){
   var username = req.body.username;
   var password = req.body.password;
-  var user = findUser(username, password);
+  var user = findUserValid(username, password);
 
   if (typeof(username) == 'string' && typeof(password) == 'string' && user){
     var token = randomToken();
@@ -20,7 +20,7 @@ app.post('/login', function(req, res){
       if(err) throw(err);
       console.log('New token saved');
     });
-    res.status(200).send({token: token});
+    res.status(200).send({token: token}); 
   } else {
     res.status(404).send({message: 'You should provide a valid username and password'});
   }
@@ -32,6 +32,42 @@ app.post('/create-account', function(req, res){
   // lastName: String(optional),
   // password: String(required),
   // age: String, (optional)
+  if (typeof(req.body.firstName) == 'string'){
+    var firstName = req.body.firstName;}
+    else {
+      var firstName = "";
+    }
+  if (typeof (req.body.lastName) == 'string') {
+    var lastName = req.body.lastName;
+  }
+  else {
+    var lastName = "";
+  }
+  if (typeof (req.body.age) == 'string') {
+    var age = req.body.age;
+  }
+  else {
+    var age = "";
+  }
+
+  var username = req.body.username;
+  var password = req.body.password;
+
+  if (typeof(username) == 'string' && typeof(password) == 'string'){
+     var userExist = findUserExist(username);
+     console.log('username: ', username);
+     console.log('userExist: ', userExist);
+     if (username == userExist) {
+       res.status(404).send({message: 'User already exists'});
+     } else {
+       userList.list.push({username:username, password:password, lastName:lastName, firstName:firstName, age:age});
+       fs.writeFile('./userList.json', JSON.stringify(userList), function (err) {
+         if (err) throw (err);
+         console.log('New user saved');
+       });
+       res.status(200).send({message: 'New user saved'}); 
+     }
+  }
 });
 
 app.get('/users', function(req, res){
@@ -51,11 +87,22 @@ function randomToken(){
   return result;
 }
 
-function findUser(username, password) {
+function findUserValid(username, password) {
   var result = userList.list.find(function (element) {
     if (element.username == username && element.password == password) {
       return element;
     }
   });
   return result;
+}
+
+function findUserExist(username) {
+  var result = userList.list.find(function (element) {
+    if (element.username == username) {
+      return element;
+    }
+  });
+  if(result){
+    return result.username;
+  }
 }
