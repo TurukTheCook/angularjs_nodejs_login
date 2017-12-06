@@ -1,8 +1,8 @@
-angular.module('myApp',['ui.router']);
+angular.module('myApp', ['ui.router']);
 
-angular.module('myApp').config(function($stateProvider, $urlRouterProvider) {
+angular.module('myApp').config(function ($stateProvider, $urlRouterProvider) {
 
-$urlRouterProvider.otherwise('/login');
+  $urlRouterProvider.otherwise('/login');
 
   var login = {
     name: 'login',
@@ -10,11 +10,11 @@ $urlRouterProvider.otherwise('/login');
     component: 'loginComponent'
   };
 
-	var create_account = {
-		name: 'create_account',
-		url: '/create-account',
-    component: 'componentCreateUser'
-	};
+  var createAccount = {
+    name: 'createAccount',
+    url: '/create-account',
+    component: 'createAccountComponent'
+  };
 
   var list = {
     name: 'list',
@@ -22,7 +22,7 @@ $urlRouterProvider.otherwise('/login');
     templateUrl: 'views/list.html'
   };
 
-	$stateProvider.state(login);
-	$stateProvider.state(create_account);
-	$stateProvider.state(list);
+  $stateProvider.state(login);
+  $stateProvider.state(createAccount);
+  $stateProvider.state(list);
 });
