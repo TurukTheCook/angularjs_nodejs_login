@@ -18,7 +18,7 @@ app.use(function (req, res, next) {
 function randomToken() {
   var string = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
   var result = '';
-  for (var i = 0; i < 8; i++) {
+  for (var i = 0; i < 32; i++) {
     result += string[Math.floor(Math.random() * (string.length - 1))];
   }
   return result;
@@ -58,9 +58,9 @@ app.post('/login', function(req, res){
       if(err) throw(err);
       console.log('New token saved');
     });
-    res.status(200).send(token); 
+    res.status(200).send({'token':token}); 
   } else {
-    res.status(400).send('You should provide a valid username and password');
+    res.status(400).send({'message':'You should provide a valid username and password'});
   }
 });
 
@@ -80,17 +80,17 @@ app.post('/create-account', function(req, res){
   if (typeof(username) == 'string' && typeof(password) == 'string'){
      var userExist = findUserExist(username);
      if (username == userExist) {
-       res.status(400).send('User already exists');
+       res.status(400).send({'message':'User already exists'});
      } else {
        userList.list.push({username:username, password:password, lastName:lastName, firstName:firstName, age:age});
        fs.writeFile('userList.json', JSON.stringify(userList), function (err) {
          if (err) throw (err);
          console.log('New user saved');
        });
-       res.status(200).send('New user saved'); 
+       res.status(200).send({'message':'New user saved'}); 
      }
   } else {
-    res.status(400).send('Please enter a valid username and password');
+    res.status(400).send({'message':'Please enter a valid username and password'});
   }
 });
 

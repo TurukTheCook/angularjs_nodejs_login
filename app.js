@@ -7,7 +7,10 @@ angular.module('myApp').config(function ($stateProvider, $urlRouterProvider) {
   var login = {
     name: 'login',
     url: '/home',
-    component: 'loginComponent'
+    component: 'loginComponent',
+    params: {
+      message: null
+    }
   };
 
   var createAccount = {
