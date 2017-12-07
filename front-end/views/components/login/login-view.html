@@ -1,0 +1,13 @@
+<h1>Login</h1>
+
+<div>
+  <p><label for="username">My username : <input ng-model="username" type="text"></label></p>
+  <p><label for="password">My password : <input ng-model="password" type="password"></label></p>
+  <div class="center">
+    <button ng-click="login()">Sign in</button>
+    <button ng-click="createAccount()">Create Account</button>
+    <button ng-click="deleteToken()">Delete Token</button>
+  </div>
+  <hr>
+  <div>{{message}}</div>
+</div>
