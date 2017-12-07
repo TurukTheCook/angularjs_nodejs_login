@@ -5,4 +5,6 @@
   <p><label for="password">My password : <input ng-model="password" type="password"></label></p>
   <button ng-click="login()">Sign in</button>
   <button ng-click="createAccount()">Create an account</button>
+  <div>Token: {{token || "--"}}</div>
+  <div>Error: {{errorlog || "--"}}</div>
 </div>

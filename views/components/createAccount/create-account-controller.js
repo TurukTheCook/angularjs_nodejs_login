@@ -11,13 +11,13 @@ angular.module('myApp').controller('createAccountController', function($scope, $
     };
     //Call the services
     $http.post('http://localhost:1407/create-account', JSON.stringify(data)).then(function (res) {
-      if (res.status(200)) {
-        console.log(res)
+      if (res.status == 200) {
+        console.log('ok', res)
       /*   localStorage.setItem('auth-token', res.data.token); */
-        $state.go('login');
+        //$state.go('login');
       }
-      if (res.status(404)) {
-        alert(res);
+      else if (res.status == 400) {
+        console.log('not ok', res);
       }
     });
   }
