@@ -10,15 +10,14 @@ angular.module('myApp').controller('createAccountController', function($scope, $
       age: $scope.age
     };
     //Call the services
-    $http.post('http://localhost:5000/create-account', JSON.stringify(data)).then(function (res) {
+    $http.post('http://localhost:1407/create-account', JSON.stringify(data)).then(function (res) {
       if (res.status(200)) {
         console.log(res)
       /*   localStorage.setItem('auth-token', res.data.token); */
         $state.go('login');
       }
       if (res.status(404)) {
-        /* alert(res.data.message); */
-        console.log('nope c-a');
+        alert(res);
       }
     });
   }

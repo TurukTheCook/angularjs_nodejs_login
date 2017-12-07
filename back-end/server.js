@@ -45,6 +45,7 @@ function findUserExist(username) {
 }
 
 app.post('/login', function(req, res){
+  console.log(req.body.username);
   var username = req.body.username;
   var password = req.body.password;
   var user = findUserValid(username, password);
@@ -52,13 +53,13 @@ app.post('/login', function(req, res){
   if (typeof(username) == 'string' && typeof(password) == 'string' && user){
     var token = randomToken();
     tokenList.list.push(token);
-    fs.writeFile('./tokenList.json', JSON.stringify(tokenList), function(err){
+    fs.writeFile('back-end/tokenList.json', JSON.stringify(tokenList), function(err){
       if(err) throw(err);
       console.log('New token saved');
     });
-    res.status(200).send({token: token}); 
+    res.status(200).send({'token': token}); 
   } else {
-    res.status(404).send({message: 'You should provide a valid username and password'});
+    res.status(404).send({'message':'You should provide a valid username and password'});
   }
 });
 
@@ -81,22 +82,22 @@ app.post('/create-account', function(req, res){
        res.status(404).send({message: 'User already exists'});
      } else {
        userList.list.push({username:username, password:password, lastName:lastName, firstName:firstName, age:age});
-       fs.writeFile('./userList.json', JSON.stringify(userList), function (err) {
+       fs.writeFile('back-end/userList.json', JSON.stringify(userList), function (err) {
          if (err) throw (err);
          console.log('New user saved');
        });
-       res.status(200).send({message: 'New user saved'}); 
+       res.status(200).send({'message': 'New user saved'}); 
      }
   } else {
-    res.status(404).send({message: 'Please enter a valid username and password'});
+    res.status(404).send({'message': 'Please enter a valid username and password'});
   }
 });
-/* 
+
 app.get('/users', function(req, res){
+  res.status(200).send({'message': 'users'});
+});
 
-}); */
 
-
-app.listen(5000, function(){
-  console.log('The server is running on port 5000...');
+app.listen(1407, function(){
+  console.log('The server is running on port 1407...');
 });
