@@ -2,11 +2,11 @@ angular.module('myApp', ['ui.router']);
 
 angular.module('myApp').config(function ($stateProvider, $urlRouterProvider) {
 
-  $urlRouterProvider.otherwise('/login');
+  $urlRouterProvider.otherwise('/home');
 
   var login = {
     name: 'login',
-    url: '/login',
+    url: '/home',
     component: 'loginComponent'
   };
 
