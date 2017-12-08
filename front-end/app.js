@@ -9,7 +9,8 @@ angular.module('myApp').config(function ($stateProvider, $urlRouterProvider) {
     url: '/home',
     component: 'loginComponent',
     params: {
-      message: null
+      message: null,
+      logged: false
     }
   };
 
@@ -22,7 +23,7 @@ angular.module('myApp').config(function ($stateProvider, $urlRouterProvider) {
   var list = {
     name: 'list',
     url: '/list',
-    templateUrl: 'views/list.html'
+    component: 'listComponent'
   };
 
   $stateProvider.state(login);

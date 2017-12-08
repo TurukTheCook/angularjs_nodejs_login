@@ -1,0 +1,16 @@
+<div class="wrap">
+  <h1>User List</h1>
+  <div>
+    <div ng-repeat="user in userlist track by $index">
+      <hr> User {{$index+1}}
+      <br> Username: {{user.username}}
+      <br> First Name: {{user.firstName}}
+      <br> Last Name: {{user.lastName}}
+      <br> Age: {{user.age}}
+    </div>
+    {{message}}
+    <hr>
+    <button ng-click="goBack()">Go back</button>
+    <hr>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="wrap">
+  <h1>Login</h1>
+  <div>
+    <input ng-model="username" type="text" placeholder="Username">
+    <br>
+    <input ng-model="password" type="password" placeholder="Password">
+    <hr>
+    <div class="center">
+      <button ng-click="login()" ng-if="!logged">Sign in</button>
+      <button ng-click="loggout()" ng-if="logged">Loggout</button>
+      <button ng-click="createAccount()">Create Account</button>
+      <button ng-click="viewUserList()">View UserList</button>
+    </div>
+    <hr>
+    <div>{{message}}</div>
+  </div>
+</div>
