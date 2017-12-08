@@ -1,4 +1,4 @@
-<div class="wrap">
+<div class="flex-center flex-column">
   <h1>Create Account</h1>
   <div>
     <input ng-model="username" type="text" placeholder="Username">
@@ -10,10 +10,9 @@
     <input ng-model="lastName" type="text" placeholder="Last Name (opt)">
     <br>
     <input ng-model="age" type="text" placeholder="Age (opt)">
-    <hr>
-    <div class="center">
-      <button class="btn btn-dark" ng-click="createAccount()">Create Account</button>
-      <button class="btn btn-dark" ng-click="goBack()">Go Back to login</button>
+    <div class="flex-center mt-3">
+      <button class="btn btn-info" ng-click="createAccount()">Create Account</button>
+      <button class="btn btn-dark" ng-click="goBack()">Go Back</button>
     </div>
     <hr>
     <p>{{message}}</p>

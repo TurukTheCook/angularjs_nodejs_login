@@ -45,7 +45,7 @@ angular.module('myApp').controller('loginController', function ($scope, $state, 
   }
 
   function viewProfile() {
-    $state.go('viewProfile');
+    $state.go('user');
   }
 
   function loggout() {

@@ -6,11 +6,10 @@
         <input ng-model="username" type="text" placeholder="Username">
         <br>
         <input ng-model="password" type="password" placeholder="Password">
-      <hr>
-      <div class="flex-center">
-        <button class="btn btn-dark" ng-click="login()" ng-if="!logged">Sign in</button>
-        <button class="btn btn-dark" ng-click="loggout()" ng-if="logged">Loggout</button>
-        <button class="btn btn-dark" ng-click="createAccount()" ng-if="!logged">Create Account</button>
+      <div class="flex-center mt-3">
+        <button class="btn btn-success" ng-click="login()" ng-if="!logged">Sign in</button>
+        <button class="btn btn-warning" ng-click="loggout()" ng-if="logged">Loggout</button>
+        <button class="btn btn-info" ng-click="createAccount()" ng-if="!logged">Create Account</button>
         <button class="btn btn-dark" ng-click="viewProfile()" ng-if="logged">View Profile</button>
         <button class="btn btn-dark" ng-click="viewUserList()">View UserList</button>
       </div>
