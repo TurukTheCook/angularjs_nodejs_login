@@ -8,7 +8,7 @@ Login app with back-end (nodejs) + front-end (angularjs ui-router)<br>
  -log out function (delete token from storage)<br>
  ![loggout preview](https://i.gyazo.com/b0d1f5d57412fe7369d5a7c14292ae41.png)<br>
  -viewing user list if logged only else access denied.<br>
- ![userlist preview](https://i.gyazo.com/3bf3bbd365c89be410a022be5ba3f39c.png)<br>
+ ![userlist preview](https://i.gyazo.com/5a9c8bf3fa1423177d72166208f6910a.png)<br>
  -random 32chars token retrieval<br>
  -writing user list and token list in json files.<br>
  
