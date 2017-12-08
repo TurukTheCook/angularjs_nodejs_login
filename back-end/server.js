@@ -1,3 +1,4 @@
+// STARTERS
 var express = require('express');
 var bodyParser = require('body-parser');
 var fs = require('fs');
@@ -10,6 +11,7 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 
+// CROSS ORIGIN
 app.use(function (req, res, next) {
   res.header(`Access-Control-Allow-Origin`, `*`);
   res.header(`Access-Control-Allow-Methods`, `GET,PUT,POST,DELETE`);
@@ -17,6 +19,7 @@ app.use(function (req, res, next) {
   next();
 });
 
+// FUNCTIONS
 function randomToken() {
   var string = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
   var result = '';
@@ -26,32 +29,35 @@ function randomToken() {
   return result;
 }
 
-function findUserValid(username, password) {
+function tokenCheck(token) {
+  var result = tokenList.find(function (element) {
+    return element == token;
+  });
+  return result;
+}
+
+function findUser(username) {
   var result = userList.find(function (element) {
-    if (element.username == username && element.password == password) {
+    if (element.username == username) {
       return element;
     }
   });
   return result;
 }
 
-function findUserExist(username) {
-  var result = userList.find(function (element) {
-    if (element.username == username) {
-      return element;
-    }
-  });
-  if (result) {
-    return result.username;
-  }
-}
-
+// PATHS
+// LOGIN - FIRST PAGE
 app.post('/login', function (req, res) {
   var username = req.body.username;
   var password = req.body.password;
-  var user = findUserValid(username, password);
+  var user = findUser(username);
+  var userValid = false;
 
-  if (typeof (username) == 'string' && typeof (password) == 'string' && user) {
+  if (user) {
+    if (user.username == username && user.password == password) userValid = true;
+  }
+
+  if (typeof (username) == 'string' && typeof (password) == 'string' && userValid) {
     var token = randomToken();
     tokenList.push(token);
     fs.writeFile('tokenList.json', JSON.stringify(tokenList), function (err) {
@@ -59,7 +65,8 @@ app.post('/login', function (req, res) {
       console.log('New token saved');
     });
     res.status(200).send({
-      'token': token
+      'token': token,
+      'userId': user.username
     });
   } else {
     res.status(400).send({
@@ -68,6 +75,7 @@ app.post('/login', function (req, res) {
   }
 });
 
+// CREATE USER ACCOUNT
 app.post('/create-account', function (req, res) {
   // username: String(required),
   // firstName: String(optional),
@@ -82,8 +90,14 @@ app.post('/create-account', function (req, res) {
   var password = req.body.password;
 
   if (typeof (username) == 'string' && typeof (password) == 'string') {
-    var userExist = findUserExist(username);
-    if (username == userExist) {
+    var user = findUser(username);
+    var userExist = false;
+
+    if (user) {
+      if (user.username == username) userExist = true;
+    }
+    
+    if (userExist) {
       res.status(409).send({
         'message': 'User already exists'
       });
@@ -110,11 +124,11 @@ app.post('/create-account', function (req, res) {
   }
 });
 
+// GET LIST OF USERS
 app.get('/users', function (req, res) {
   var sentToken = req.query.token;
-  var validToken = tokenList.find(function (element) {
-    return element == sentToken;
-  });
+  var validToken = tokenCheck(sentToken);
+
   if (validToken) res.status(200).send({
     'list': userList
   });
@@ -123,7 +137,23 @@ app.get('/users', function (req, res) {
   });
 });
 
+// USER PROFILE DISPLAY
+app.get('/user/:id', function (req, res) {
+  var userId = req.params.id;
 
+});
+
+// USER PROFILE UPDATE
+app.put('/user/:id', function (req, res) {
+
+});
+
+// USER PROFILE DELETE
+app.delete('/user/:id', function (req, res) {
+
+});
+
+// STARTING SERVER
 app.listen(1407, function () {
   console.log('The server is running on port 1407...');
 });

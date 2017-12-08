@@ -1,13 +1,15 @@
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
   width: 100vw;
 }
 
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.userlist {
+  overflow-y: auto;
+  max-height: 400px;
+}
+
+.usercard {
+  max-width: 200px;
+  word-wrap: break-word;
+  align-content: flex-start;
 }

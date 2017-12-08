@@ -1,17 +1,21 @@
-<div class="wrap">
-  <h1>Login</h1>
-  <div>
-    <input ng-model="username" type="text" placeholder="Username">
-    <br>
-    <input ng-model="password" type="password" placeholder="Password">
-    <hr>
-    <div class="center">
-      <button ng-click="login()" ng-if="!logged">Sign in</button>
-      <button ng-click="loggout()" ng-if="logged">Loggout</button>
-      <button ng-click="createAccount()">Create Account</button>
-      <button ng-click="viewUserList()">View UserList</button>
+<div class="container flex-center">
+  <div class="flex center flex-column">
+    <h1 ng-if="!welcome">Login</h1>
+    <h1 ng-if="welcome">Welcome {{userId}}</h1>
+    <div>
+        <input ng-model="username" type="text" placeholder="Username">
+        <br>
+        <input ng-model="password" type="password" placeholder="Password">
+      <hr>
+      <div class="flex-center">
+        <button class="btn btn-dark" ng-click="login()" ng-if="!logged">Sign in</button>
+        <button class="btn btn-dark" ng-click="loggout()" ng-if="logged">Loggout</button>
+        <button class="btn btn-dark" ng-click="createAccount()" ng-if="!logged">Create Account</button>
+        <button class="btn btn-dark" ng-click="viewProfile()" ng-if="logged">View Profile</button>
+        <button class="btn btn-dark" ng-click="viewUserList()">View UserList</button>
+      </div>
+      <hr>
+      <div class="alert {{alertType}}" role="alert">{{message}}</div>
     </div>
-    <hr>
-    <div>{{message}}</div>
   </div>
 </div>

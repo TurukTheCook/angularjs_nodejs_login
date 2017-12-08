@@ -1,16 +1,20 @@
-<div class="wrap">
+<div class="container flex-center flex-column">
   <h1>User List</h1>
   <div>
-    <div ng-repeat="user in userlist track by $index">
-      <hr> User {{$index+1}}
-      <br> Username: {{user.username}}
-      <br> First Name: {{user.firstName}}
-      <br> Last Name: {{user.lastName}}
-      <br> Age: {{user.age}}
+    <div class="container d-flex flex-justify-center flex-wrap userlist">
+      <div class="p-1 usercard" ng-repeat="user in userlist track by $index">
+        <hr> User {{$index+1}}
+        <br> Username: {{user.username}}
+        <br> First Name: {{user.firstName}}
+        <br> Last Name: {{user.lastName}}
+        <br> Age: {{user.age}}
+      </div>
     </div>
-    {{message}}
+    <div class="alert {{alertType}}">
+      {{message}}
+    </div>
     <hr>
-    <button ng-click="goBack()">Go back</button>
+    <button class="btn btn-dark" ng-click="goBack()">Go back</button>
     <hr>
   </div>
 </div>

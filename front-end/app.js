@@ -10,7 +10,9 @@ angular.module('myApp').config(function ($stateProvider, $urlRouterProvider) {
     component: 'loginComponent',
     params: {
       message: null,
-      logged: false
+      logged: false,
+      created: false,
+      alertType: null
     }
   };
 
@@ -26,7 +28,14 @@ angular.module('myApp').config(function ($stateProvider, $urlRouterProvider) {
     component: 'listComponent'
   };
 
+  var user = {
+    name: 'user',
+    url: '/user',
+    component: 'profileComponent',
+  }
+
   $stateProvider.state(login);
   $stateProvider.state(createAccount);
   $stateProvider.state(list);
+  $stateProvider.state(user);
 });

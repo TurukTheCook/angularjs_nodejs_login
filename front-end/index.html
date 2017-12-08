@@ -3,17 +3,40 @@
 
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>Login Full App</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Quicksand|Roboto" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Bootstrap core CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.3/css/mdb.min.css" rel="stylesheet">
+  <!-- Custom Style -->
   <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body ng-app="myApp">
-  <div>
+  <div class="container-fluid flex-center p-0">
     <ui-view></ui-view>
   </div>
 
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.3/js/mdb.min.js"></script>
+  <!-- AngularJS -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+  <!-- AngularJS Ui-Router -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.js"></script>
+  <!-- myApp -->
   <script src="app.js"></script>
   <script src="components/createAccount/create-account-component.js"></script>
   <script src="components/createAccount/create-account-controller.js"></script>
@@ -21,6 +44,8 @@
   <script src="components/login/login-controller.js"></script>
   <script src="components/userList/user-list-component.js"></script>
   <script src="components/userList/user-list-controller.js"></script>
+  <script src="components/profile/profile-component.js"></script>
+  <script src="components/profile/profile-controller.js"></script>
 </body>
 
 </html>

@@ -15,7 +15,7 @@ angular.module('myApp').controller('createAccountController', function($scope, $
     $http.post('http://localhost:1407/create-account', JSON.stringify(data)).then(
       function (res) {
         var message = res.data.message;
-        $state.go('login', {message:message});
+        $state.go('login', {message:message, alertType:'alert-info', created:true});
     }, function(res) {
       $scope.message = res.data.message;
     });

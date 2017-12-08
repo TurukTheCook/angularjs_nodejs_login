@@ -1,11 +1,19 @@
 angular.module('myApp').controller('loginController', function ($scope, $state, $stateParams, $http) {
   $scope.message = $stateParams.message;
+  $scope.alertOn = false;
   $scope.login = login;
   $scope.loggout = loggout;
   $scope.createAccount = createAccount;
+  $scope.viewProfile = viewProfile;
   $scope.viewUserList = viewUserList;
-  var token = localStorage.getItem('auth-token');
-  if ($stateParams.logged == true) $scope.logged = true;
+  $scope.token = localStorage.getItem('auth-token');
+  $scope.userId = localStorage.getItem('userId');
+  if ($scope.userId != '') $scope.welcome = true;
+  if ($scope.token != '') $scope.logged = true;
+  if ($stateParams.created) {
+    $scope.alertType = 'alert-info';
+    $scope.alertOn = true;
+  }
 
   function login() {
     var data = {
@@ -17,11 +25,18 @@ angular.module('myApp').controller('loginController', function ($scope, $state, 
     $http.post('http://localhost:1407/login', JSON.stringify(data)).then(
       function (res) {
         localStorage.setItem('auth-token', res.data.token);
+        localStorage.setItem('userId', res.data.userId);
         $scope.message = 'Logged in';
+        $scope.alertType = 'alert-success';
+        $scope.alertOn = true;
         $scope.logged = true;
+        $scope.welcome = true;
+        $scope.userId = res.data.userId;
       },
       function (res) {
         $scope.message = res.data.message;
+        $scope.alertType = 'alert-danger';
+        $scope.alertOn = true;
       });
   }
 
@@ -29,10 +44,19 @@ angular.module('myApp').controller('loginController', function ($scope, $state, 
     $state.go('createAccount');
   }
 
+  function viewProfile() {
+    $state.go('viewProfile');
+  }
+
   function loggout() {
     localStorage.setItem('auth-token', '');
+    localStorage.setItem('userId', '');
+    $scope.userId = '';
     $scope.message = 'Logged out';
+    $scope.alertType = 'alert-warning';
+    $scope.alertOn = true;
     $scope.logged = false;
+    $scope.welcome = false;
   }
 
   function viewUserList() {
