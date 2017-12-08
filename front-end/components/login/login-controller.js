@@ -2,7 +2,7 @@ angular.module('myApp').controller('loginController', function ($scope, $state, 
   $scope.message = $stateParams.message;
   $scope.alertType = '';
   $scope.login = login;
-  $scope.loggout = loggout;
+  $scope.logout = logout;
   $scope.createAccount = createAccount;
   $scope.viewProfile = viewProfile;
   $scope.viewUserList = viewUserList;
@@ -45,7 +45,7 @@ angular.module('myApp').controller('loginController', function ($scope, $state, 
     $state.go('user');
   }
 
-  function loggout() {
+  function logout() {
     localStorage.setItem('auth-token', '');
     localStorage.setItem('userId', '');
     $scope.userId = '';
