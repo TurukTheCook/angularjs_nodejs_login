@@ -96,7 +96,7 @@ app.post('/create-account', function (req, res) {
     if (user) {
       if (user.username == username) userExist = true;
     }
-    
+
     if (userExist) {
       res.status(409).send({
         'message': 'User already exists'
@@ -140,7 +140,20 @@ app.get('/users', function (req, res) {
 // USER PROFILE DISPLAY
 app.get('/user/:id', function (req, res) {
   var userId = req.params.id;
+  var sentToken = req.query.token;
+  var validToken = tokenCheck(sentToken);
 
+  var user = findUser(username);
+
+  if (validToken) res.status(200).send({
+    'profileId': user.username,
+    'profileLastName': user.lastName,
+    'profileFirstName': user.firstName,
+    'profileAge': user.age
+  });
+  else res.status(401).send({
+    'message': 'You must be logged in to view your profile'
+  });
 });
 
 // USER PROFILE UPDATE

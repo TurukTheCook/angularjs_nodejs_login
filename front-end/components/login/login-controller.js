@@ -1,6 +1,6 @@
 angular.module('myApp').controller('loginController', function ($scope, $state, $stateParams, $http) {
   $scope.message = $stateParams.message;
-  $scope.alertOn = false;
+  $scope.alertType = '';
   $scope.login = login;
   $scope.loggout = loggout;
   $scope.createAccount = createAccount;
@@ -12,7 +12,6 @@ angular.module('myApp').controller('loginController', function ($scope, $state, 
   if ($scope.token != '') $scope.logged = true;
   if ($stateParams.created) {
     $scope.alertType = 'alert-info';
-    $scope.alertOn = true;
   }
 
   function login() {
@@ -28,7 +27,6 @@ angular.module('myApp').controller('loginController', function ($scope, $state, 
         localStorage.setItem('userId', res.data.userId);
         $scope.message = 'Logged in';
         $scope.alertType = 'alert-success';
-        $scope.alertOn = true;
         $scope.logged = true;
         $scope.welcome = true;
         $scope.userId = res.data.userId;
@@ -36,7 +34,6 @@ angular.module('myApp').controller('loginController', function ($scope, $state, 
       function (res) {
         $scope.message = res.data.message;
         $scope.alertType = 'alert-danger';
-        $scope.alertOn = true;
       });
   }
 
@@ -54,7 +51,6 @@ angular.module('myApp').controller('loginController', function ($scope, $state, 
     $scope.userId = '';
     $scope.message = 'Logged out';
     $scope.alertType = 'alert-warning';
-    $scope.alertOn = true;
     $scope.logged = false;
     $scope.welcome = false;
   }

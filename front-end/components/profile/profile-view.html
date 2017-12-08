@@ -2,19 +2,16 @@
   <h1>Profile: {{userId}}</h1>
   <hr class="w-75">
   <div>
-    <h3>Edit User</h3>
-    <input ng-model="username" type="text" placeholder="New Username">
+    Username: {{profileId}}
     <br>
-    <input ng-model="password" type="password" placeholder="New Password">
+    First Name: {{profileFirstName}}
     <br>
-    <input ng-model="firstName" type="text" placeholder="First Name (opt)">
+    Last Name: {{profileLastName}}
     <br>
-    <input ng-model="lastName" type="text" placeholder="Last Name (opt)">
-    <br>
-    <input ng-model="age" type="text" placeholder="Age (opt)">
+    Age : {{profileAge}}
     <div class="flex-center mt-3">
-      <button class="btn btn-dark btn-info" ng-click="editUser()">Edit</button>
-      <button class="btn btn-dark btn-danger" ng-click="deleteUser()">Delete</button>
+      <button class="btn btn-dark btn-info" ng-click="editUser()" disabled>Edit</button>
+      <button class="btn btn-dark btn-danger" ng-click="deleteUser()" disabled>Delete</button>
       <button class="btn btn-dark" ng-click="goBack()">Go Back</button>
     </div>
     <hr>
