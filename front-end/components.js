@@ -1,3 +1,36 @@
+angular.module('myApp').component('createAccountComponent', {
+  templateUrl: 'components/createAccount/create-account-view.html',
+  controller: 'createAccountController'
+});
+angular.module('myApp').controller('createAccountController', function($scope, $state, $http){
+  $scope.createAccount = createAccount;
+  $scope.message = '';
+  $scope.goBack = goBack;
+
+  function createAccount() {
+    var data = {
+      username: $scope.username,
+      password: $scope.password,
+      firstName: $scope.firstName,
+      lastName: $scope.lastName,
+      age: $scope.age
+    };
+    //Call the services
+    $http.post('http://localhost:1407/create-account', JSON.stringify(data)).then(
+      function (res) {
+        var message = res.data.message;
+        $state.go('login', {message:message, alertType:'alert-info', created:true});
+    }, function(res) {
+      $scope.message = res.data.message;
+    });
+  }
+
+  function goBack() {
+    $state.go('login');
+  }
+});
+
+
 angular.module('myApp').component('loginComponent', {
   templateUrl: 'components/login/login-view.html',
   controller: 'loginController'
@@ -5,9 +38,9 @@ angular.module('myApp').component('loginComponent', {
 
 angular.module('myApp').controller('loginController', function ($scope, $state, $stateParams, $http) {
   $scope.message = $stateParams.message;
-  $scope.alertOn = false;
+  $scope.alertType = '';
   $scope.login = login;
-  $scope.loggout = loggout;
+  $scope.logout = logout;
   $scope.createAccount = createAccount;
   $scope.viewProfile = viewProfile;
   $scope.viewUserList = viewUserList;
@@ -17,7 +50,6 @@ angular.module('myApp').controller('loginController', function ($scope, $state, 
   if ($scope.token != '') $scope.logged = true;
   if ($stateParams.created) {
     $scope.alertType = 'alert-info';
-    $scope.alertOn = true;
   }
 
   function login() {
@@ -33,7 +65,6 @@ angular.module('myApp').controller('loginController', function ($scope, $state, 
         localStorage.setItem('userId', res.data.userId);
         $scope.message = 'Logged in';
         $scope.alertType = 'alert-success';
-        $scope.alertOn = true;
         $scope.logged = true;
         $scope.welcome = true;
         $scope.userId = res.data.userId;
@@ -41,7 +72,6 @@ angular.module('myApp').controller('loginController', function ($scope, $state, 
       function (res) {
         $scope.message = res.data.message;
         $scope.alertType = 'alert-danger';
-        $scope.alertOn = true;
       });
   }
 
@@ -53,13 +83,12 @@ angular.module('myApp').controller('loginController', function ($scope, $state, 
     $state.go('user');
   }
 
-  function loggout() {
+  function logout() {
     localStorage.setItem('auth-token', '');
     localStorage.setItem('userId', '');
     $scope.userId = '';
     $scope.message = 'Logged out';
     $scope.alertType = 'alert-warning';
-    $scope.alertOn = true;
     $scope.logged = false;
     $scope.welcome = false;
   }
@@ -138,35 +167,3 @@ function goBack() {
   $state.go('login');
 }
 });
-angular.module('myApp').component('createAccountComponent', {
-  templateUrl: 'components/createAccount/create-account-view.html',
-  controller: 'createAccountController'
-});
-angular.module('myApp').controller('createAccountController', function($scope, $state, $http){
-  $scope.createAccount = createAccount;
-  $scope.message = '';
-  $scope.goBack = goBack;
-
-  function createAccount() {
-    var data = {
-      username: $scope.username,
-      password: $scope.password,
-      firstName: $scope.firstName,
-      lastName: $scope.lastName,
-      age: $scope.age
-    };
-    //Call the services
-    $http.post('http://localhost:1407/create-account', JSON.stringify(data)).then(
-      function (res) {
-        var message = res.data.message;
-        $state.go('login', {message:message, alertType:'alert-info', created:true});
-    }, function(res) {
-      $scope.message = res.data.message;
-    });
-  }
-
-  function goBack() {
-    $state.go('login');
-  }
-});
-
