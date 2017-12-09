@@ -9,4 +9,5 @@ Login app with back-end (nodejs) + front-end (angularjs ui-router)<br>
  - Random 32chars token retrieval<br>
  - Writing user list and token list in json files.<br>
  
- TBD: user edit/delete
+ Preview :<br>
+![preview image](https://i.gyazo.com/364f0589a5ba96f0cf589b0351afa27f.png)
