@@ -13,7 +13,7 @@ gulp.task('scripts', function () {
   return gulp.src(jsFiles)
     .pipe(concat('bundle.js'))
     .pipe(gulp.dest(jsDest))
-    .pipe(rename('bundle.min.js'))
+/*     .pipe(rename('bundle.min.js'))
     .pipe(uglify())
-    .pipe(gulp.dest(jsDest));
+    .pipe(gulp.dest(jsDest)); */
 });

@@ -51,15 +51,21 @@ app.post('/login', function (req, res) {
   if (typeof (body.username) == 'string' && typeof (body.password) == 'string') {
     var user = findUser(body.username);
     if (user) {
-      var token = randomToken();
-      tokenList.push(token);
-      res.status(200).send({
-        'token': token,
-        'userId': user.username
-      });
+      if (user.password == body.password){
+        var token = randomToken();
+        tokenList.push(token);
+        res.status(200).send({
+          'token': token,
+          'userId': user.username
+        });
+      } else {
+        res.status(400).send({
+          'message': 'You should provide a valid username and password'
+        });
+      }
     } else {
       res.status(404).send({
-        'message': 'No account found with username:' + body.username
+        'message': 'No account found with username: ' + body.username
       });
     }
   } else {
@@ -82,7 +88,7 @@ app.post('/create-account', function (req, res) {
   var age = (typeof (body.age) == 'string') ? body.age : "";
 
   if (typeof (body.username) == 'string' && typeof (body.password) == 'string') {
-    var user = findUser(username);
+    var user = findUser(body.username);
 
     if (user) {
       res.status(409).send({
@@ -99,7 +105,7 @@ app.post('/create-account', function (req, res) {
       fs.writeFile('userList.json', JSON.stringify(userList), function (err) {
         if (err) {
           console.log('Error on writing userlist');
-          res.status(500).send('message': 'Error on writing userlist');
+          res.status(500).send({'message': 'Error on writing userlist'});
         } else {
           console.log('New user "' + body.username + '" saved');
           res.status(200).send({
@@ -134,7 +140,6 @@ app.get('/user/:id', function (req, res) {
   var sentToken = req.query.token;
   var validToken = tokenCheck(sentToken);
 
-
   if (validToken) {
     var user = findUser(username);
     res.status(200).send({
@@ -149,12 +154,70 @@ app.get('/user/:id', function (req, res) {
 
 // USER PROFILE UPDATE
 app.put('/user/:id', function (req, res) {
+  var username = req.params.id;
+  var sentToken = req.query.token;
+  var validToken = tokenCheck(sentToken);
+  var body = req.body;
 
+  if (validToken) {
+    var user = findUser(username);
+    for (var i = userList.length-1; i >= 0; i--) {
+      if (userList[i].username == user.username){
+        userList[i].username = body.username;
+        userList[i].password = body.password;
+        userList[i].firstName = body.firstName;
+        userList[i].lastName = body.lastName;
+        userList[i].age = body.age;
+      }
+    }
+    fs.writeFile('userList.json', JSON.stringify(userList), function (err) {
+      if (err) {
+        console.log('Error on writing userlist');
+        res.status(500).send({ 'message': 'Error on writing userlist' });
+      } else {
+        console.log('Profile updated successfully');
+        res.status(200).send({
+          'message': 'Profile edited successfully'
+        });
+      }
+    });
+  } else {
+    res.status(401).send({
+      'message':'You must be logged in to edit your profile'
+    });
+  }
 });
 
 // USER PROFILE DELETE
 app.delete('/user/:id', function (req, res) {
+  var username = req.params.id;
+  var sentToken = req.query.token;
+  var validToken = tokenCheck(sentToken);
 
+  if (validToken) {
+    var user = findUser(username);
+    for (var i = userList.length - 1; i >= 0; i--) {
+      if (userList[i].username == user.username) {
+        var profileIndex = i;
+      }
+    }
+    userList.splice(profileIndex, 1);
+    fs.writeFile('userList.json', JSON.stringify(userList), function (err) {
+      if (err) {
+        console.log('Error on writing userlist');
+        res.status(500).send({ 'message': 'Error on writing userlist' });
+      } else {
+        console.log('Profile deleted successfully');
+        res.status(200).send({
+          'message': 'Profile deleted successfully'
+        });
+      }
+    });
+  } else {
+    res.status(401).send({
+      'message': 'You must be logged in to delete your profile'
+    });
+  }
 });
 
 // STARTING SERVER

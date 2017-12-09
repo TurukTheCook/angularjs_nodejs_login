@@ -2,6 +2,7 @@ angular.module('myApp').controller('createAccountController', function($scope, $
   $scope.createAccount = createAccount;
   $scope.message = '';
   $scope.goBack = goBack;
+  $scope.alertType = "";
 
   function createAccount() {
     var data = {
@@ -18,6 +19,7 @@ angular.module('myApp').controller('createAccountController', function($scope, $
         $state.go('login', {message:message, alertType:'alert-info', created:true});
     }, function(res) {
       $scope.message = res.data.message;
+      $scope.alertType = "alert-danger";
     });
   }
 

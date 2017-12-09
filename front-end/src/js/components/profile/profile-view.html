@@ -12,20 +12,20 @@
       Age : {{profileAge}}
     </div>
     <div ng-show="editEnabled">
-      <input ng-model="editUsername" ng-show="editEnabled">
-      <input ng-model="editPassword" ng-show="editPassword">
-      <input ng-model="editFirstName" ng-show="editEnabled">
-      <input ng-model="editLastName" ng-show="editEnabled">
-      <input ng-model="editAge" ng-show="editEnabled">
+      <input ng-model="editUsername" ng-show="editEnabled" placeholder="Username" type="text"><br>
+      <input ng-model="editPassword" ng-show="editEnabled" placeholder="Password" type="password"><br>
+      <input ng-model="editFirstName" ng-show="editEnabled" placeholder="First Name" type="text"><br>
+      <input ng-model="editLastName" ng-show="editEnabled" placeholder="Last Name" type="text"><br>
+      <input ng-model="editAge" ng-show="editEnabled" placeholder="Age" type="text">
     </div>
     <div class="flex-center mt-3" ng-hide="editEnabled">
-      <button class="btn btn-info" ng-click="editUser()" disabled>Edit</button>
-      <button class="btn btn-danger" ng-click="deleteUser()" disabled>Delete</button>
+      <button class="btn btn-info" ng-click="editUser()" ng-hide="!logged">Edit</button>
+      <button class="btn btn-danger" ng-click="deleteUser()" ng-hide="!logged">Delete</button>
       <button class="btn btn-dark" ng-click="goBack()">Go Back</button>
     </div>
     <div class="flex-center mt-3" ng-show="editEnabled">
-      <button class="btn btn-success" ng-click="saveEdit()" disabled>Save</button>
-      <button class="btn btn-dark" ng-click="cancelEdit()" disabled>Cancel</button>
+      <button class="btn btn-success" ng-click="saveEdit()">Save</button>
+      <button class="btn btn-dark" ng-click="cancelEdit()">Cancel</button>
     </div>
     <hr>
     <div class="alert {{alertType}}" role="alert">{{message}}</div>
