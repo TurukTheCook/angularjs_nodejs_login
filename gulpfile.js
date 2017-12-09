@@ -1,18 +1,19 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
+var rename = require('gulp-rename');
+var uglify = require('gulp-uglify');
 
-gulp.task('default', ['components']);
+gulp.task("default", ["scripts"]);
 
 //script paths
-var jsFiles = 'front-end/components/**/*.js';
-var jsDest = 'front-end';
+var jsFiles = 'front-end/src/js/**/*.js';
+var jsDest = 'front-end/dist/js';
 
-gulp.task('components', function () {
+gulp.task('scripts', function () {
   return gulp.src(jsFiles)
-    .pipe(concat('components.js'))
+    .pipe(concat('bundle.js'))
+    .pipe(gulp.dest(jsDest))
+    .pipe(rename('bundle.min.js'))
+    .pipe(uglify())
     .pipe(gulp.dest(jsDest));
 });
-
-// gulp.task('watch', function () {
-//   gulp.watch('front-end/**/*.js', ['scripts']);
-// });

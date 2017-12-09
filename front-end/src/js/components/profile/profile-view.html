@@ -1,0 +1,33 @@
+<div class="flex-center flex-column">
+  <h1>Profile</h1>
+  <hr class="w-75">
+  <div>
+    <div ng-hide="editEnabled">
+      Username: {{profileId}}
+      <br>
+      First Name: {{profileFirstName}}
+      <br>
+      Last Name: {{profileLastName}}
+      <br>
+      Age : {{profileAge}}
+    </div>
+    <div ng-show="editEnabled">
+      <input ng-model="editUsername" ng-show="editEnabled">
+      <input ng-model="editPassword" ng-show="editPassword">
+      <input ng-model="editFirstName" ng-show="editEnabled">
+      <input ng-model="editLastName" ng-show="editEnabled">
+      <input ng-model="editAge" ng-show="editEnabled">
+    </div>
+    <div class="flex-center mt-3" ng-hide="editEnabled">
+      <button class="btn btn-info" ng-click="editUser()" disabled>Edit</button>
+      <button class="btn btn-danger" ng-click="deleteUser()" disabled>Delete</button>
+      <button class="btn btn-dark" ng-click="goBack()">Go Back</button>
+    </div>
+    <div class="flex-center mt-3" ng-show="editEnabled">
+      <button class="btn btn-success" ng-click="saveEdit()" disabled>Save</button>
+      <button class="btn btn-dark" ng-click="cancelEdit()" disabled>Cancel</button>
+    </div>
+    <hr>
+    <div class="alert {{alertType}}" role="alert">{{message}}</div>
+  </div>
+</div>
