@@ -7,7 +7,7 @@ Login app with back-end (nodejs) + front-end (angularjs ui-router)<br>
  - Viewing user list if logged only else access denied.<br>
  - Profile display, edit and delete.<br>
  - Random 32chars token retrieval<br>
- - Writing user list and token list in json files.<br>
+ - Writing userlist in json file.<br>
  
  Preview :<br>
 ![preview image](https://i.gyazo.com/364f0589a5ba96f0cf589b0351afa27f.png)
